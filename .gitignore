@@ -21,3 +21,7 @@ Thumbs.db
 
 # Docker
 .dockerignore
+
+# Supabase
+backend/supabase/.branches
+backend/supabase/.temp
