@@ -56,14 +56,14 @@ def health_check():
     """Health check endpoint"""
     return {"status": "OK"}
 
-@app.get("api/contact") 
+@app.get("/api/contact") 
 def options_next_form():
     """
     Handle CORS preflight requests for the option_next_form endpoint
     """
     return{"message": "OK"}
 
-@app.post("api/contact")
+@app.post("/api/contact")
 def submit_next_form(form_data: NextForm):
     """
     Endpoint to receive next form submission and save to supabe 
@@ -77,7 +77,7 @@ def submit_next_form(form_data: NextForm):
             "message": form_data.message
         }
 
-        result = supabase.table("contact").insert(data).execute()
+        result = supabase.table("contacts").insert(data).execute()
 
         print(f"Received contact form from: {form_data.name} {form_data.surname}")
         print(f"Email {form_data.email}")

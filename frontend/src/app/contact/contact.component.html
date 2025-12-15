@@ -1,1 +1,87 @@
-<p>contact works!</p>
+<div class="contact-container">
+    <h1>Contact Us</h1>
+
+    <!-- Success Message -->
+    <div *ngIf="submitStatus === 'success'" class="alert alert-success">
+        ✓ Thank you! Your message has been sent successfully.
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="submitStatus === 'error'" class="alet alert-error">
+        ✗ {{errorMessage}}
+    </div> 
+
+    <!-- Contact Form -->
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+
+        <!-- Name Field -->
+        <div class="form-group">
+            <label for="name">First Name *</label>
+            <input 
+                id="name"
+                type="text"
+                formControlName="name"
+                [class.invalid]="isFieldInvalid('name')"
+                placeholder="Enter your first name"
+            />
+            <span *ngIf="isFieldInvalid('name')" class="error">
+                {{ getfieldError('name') }}
+            </span>
+        </div>
+        
+        <!-- Surname Field -->
+        <div class="form-group">
+            <label for="surname">Last Name *</label>
+            <input 
+                id="surname"
+                type="text"
+                formControlName="surname"
+                [class.invalid]="isFieldInvalid('surname')"
+                placeholder="Enter your last name"
+            />
+            <span *ngIf="isFieldInvalid('surname')" class="error">
+                {{ getfieldError('surname') }}
+            </span>
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+            <label for="surname">Email *</label>
+            <input 
+                id="email"
+                type="email"
+                formControlName="email"
+                [class.invalid]="isFieldInvalid('email')"
+                placeholder="your.email@example.com"
+            />
+            <span *ngIf="isFieldInvalid('email')" class="error">
+                {{ getfieldError('email') }}
+            </span>
+        </div>
+
+        <!-- Message Field -->
+        <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea
+                id="message"
+                formControlName="message"
+                [class.invalid]="isFieldInvalid('message')"
+                placeholder="Enter your message (minimum 10 characters)"
+                rows="5"
+            ></textarea>
+            <span *ngIf="isFieldInvalid('message')" class="error">
+                {{ getfieldError('message') }}
+            </span>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+            type="submit"
+            [disabled]="submitStatus === 'loading'"
+            class="submit-btn"
+        >
+            <span *ngIf="submitStatus === 'loading'">Sending...</span>
+            <span *ngIf="submitStatus !== 'loading'">Send Message</span>
+        </button>
+    </form>
+</div>
