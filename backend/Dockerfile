@@ -2,7 +2,7 @@
 FROM python:3.12-slim
 
 # Set working directory 
-FROM /app
+WORKDIR /app
 
 # Copy requirements first (for Docker layer caching)
 COPY requirements.txt .
