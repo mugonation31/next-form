@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "concurrently \"npm run frontend\" \"npm run backend\" --names \"ANGULAR,FASTAPI\" --prefix-colors \"cyan,magenta\"",
     "dev:all": "concurrently \"npm run supabase\" \"npm run frontend\" \"npm run backend\" --names \"SUPABASE,ANGULAR,FASTAPI\" --prefix-colors \"green,cyan,magenta\"",
+    "dev:stop": "bash -c 'pkill -f \"ng serve\" || true; pkill -f \"uvicorn\" || true; echo \"✓ Stopped Angular and FastAPI\"'",
+    "dev:stop:all": "bash -c 'pkill -f \"ng serve\" || true; pkill -f \"uvicorn\" || true; cd backend && npx supabase stop; echo \"✓ Stopped all services\"'",
     "frontend": "cd frontend && npm start -- --open",
     "backend": "cd backend && bash -c 'source .venv/bin/activate && uvicorn main:app --reload --port 8001'",
-    "supabase": "cd backend && npx supabase start"
+    "supabase": "cd backend && npx supabase start",
+    "docker:start": "bash start-docker.sh",
+    "docker:stop": "bash stop-docker.sh"
   },
   "keywords": [],
   "author": "",

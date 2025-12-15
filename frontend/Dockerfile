@@ -23,9 +23,9 @@ RUN npm run build -- --configuration production
 FROM nginx:alpine
 
 # Copy built app from previous stage
-COPY --from=build /app/dist/frontend/browser /usr/shre/nginx/html
+COPY --from=build /app/dist/next-form-frontend/browser /usr/share/nginx/html
 
-# Copy custom Nginx confirguration
+# Copy custom Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80 
