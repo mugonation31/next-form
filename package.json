@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\" --names \"ANGULAR,FASTAPI\" --prefix-colors \"cyan,magenta\"",
+    "dev:all": "concurrently \"npm run supabase\" \"npm run frontend\" \"npm run backend\" --names \"SUPABASE,ANGULAR,FASTAPI\" --prefix-colors \"green,cyan,magenta\"",
+    "frontend": "cd frontend && npm start -- --open",
+    "backend": "cd backend && bash -c 'source .venv/bin/activate && uvicorn main:app --reload --port 8001'",
+    "supabase": "cd backend && npx supabase start"
   },
   "keywords": [],
   "author": "",
